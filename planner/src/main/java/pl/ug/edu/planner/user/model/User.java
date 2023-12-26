@@ -1,16 +1,16 @@
 package pl.ug.edu.planner.user.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.ug.edu.planner.classes.Subject;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Data
 @Builder
@@ -27,6 +27,15 @@ public class User implements UserDetails {
     private String surname;
     private String email;
     private String password;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_subject",
+            joinColumns = @JoinColumn(name="user_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id")
+    )
+    private Set<Subject> subjects;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -59,6 +68,21 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, email);
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        User user = (User) obj;
+        return Objects.equals(id, user.getId()) &&
+                Objects.equals(name, user.getName()) &&
+                Objects.equals(surname, user.getSurname()) &&
+                Objects.equals(email, user.getEmail());
     }
 }
 
