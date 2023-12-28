@@ -5,7 +5,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.ug.edu.planner.classes.Subject;
+import pl.ug.edu.planner.subject.model.Subject;
 
 import java.util.Collection;
 import java.util.List;
@@ -32,7 +32,7 @@ public class User implements UserDetails {
     @ManyToMany
     @JoinTable(
             name = "user_subject",
-            joinColumns = @JoinColumn(name="user_id"),
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "subject_id")
     )
     private Set<Subject> subjects;
@@ -74,6 +74,7 @@ public class User implements UserDetails {
     public int hashCode() {
         return Objects.hash(id, name, surname, email);
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

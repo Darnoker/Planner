@@ -1,9 +1,12 @@
-package pl.ug.edu.planner.userSubject;
+package pl.ug.edu.planner.userSubject.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.ug.edu.planner.classes.Subject;
+import pl.ug.edu.planner.subject.model.Subject;
 import pl.ug.edu.planner.user.model.User;
+
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -26,4 +29,13 @@ public class UserSubject {
     @ManyToOne
     @JoinColumn(name = "subject_id")
     private Subject subject;
+
+    private DayOfWeek dayOfWeek;
+    private LocalDateTime timeStart;
+    private LocalDateTime timeEnd;
+
+    public void setTime(LocalDateTime time) {
+        setTimeStart(time);
+        setTimeEnd(time.plusHours(1).plusMinutes(30));
+    }
 }
