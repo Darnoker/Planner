@@ -2,11 +2,13 @@ package pl.ug.edu.planner.userSubject.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.cglib.core.Local;
 import pl.ug.edu.planner.subject.model.Subject;
 import pl.ug.edu.planner.user.model.User;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @Builder
@@ -31,11 +33,6 @@ public class UserSubject {
     private Subject subject;
 
     private DayOfWeek dayOfWeek;
-    private LocalDateTime timeStart;
-    private LocalDateTime timeEnd;
-
-    public void setTime(LocalDateTime time) {
-        setTimeStart(time);
-        setTimeEnd(time.plusHours(1).plusMinutes(30));
-    }
+    private LocalTime timeStart;
+    private LocalTime timeEnd;
 }
