@@ -6,6 +6,8 @@ import pl.ug.edu.planner.service.BaseService;
 import pl.ug.edu.planner.subject.model.Subject;
 import pl.ug.edu.planner.subject.repository.SubjectRepository;
 
+import java.util.Optional;
+
 
 @Service
 @Slf4j
@@ -16,5 +18,9 @@ public class SubjectService extends BaseService<Subject, Long> {
     public SubjectService(SubjectRepository subjectRepository) {
         super(subjectRepository);
         this.subjectRepository = subjectRepository;
+    }
+
+    public Optional<Subject> getByName(String name) {
+        return subjectRepository.findByName(name);
     }
 }

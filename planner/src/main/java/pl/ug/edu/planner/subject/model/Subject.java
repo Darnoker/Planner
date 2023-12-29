@@ -16,6 +16,7 @@ import java.util.Set;
 public class Subject {
 
     @Id
+    @GeneratedValue
     private Long id;
     private String name;
 
@@ -34,7 +35,7 @@ public class Subject {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Subject subject = (Subject) obj;
-        return Objects.equals(id, subject.id) &&
+        return Objects.equals(id, subject.id) ||
                 Objects.equals(name, subject.name);
 
     }
