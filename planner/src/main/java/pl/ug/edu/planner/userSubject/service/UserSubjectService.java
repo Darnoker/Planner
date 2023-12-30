@@ -31,55 +31,40 @@ public class UserSubjectService {
         if (userOptional.isEmpty()) {
             throw new Exception("User not found");
         }
+        User user = userOptional.get();
+        Subject subject;
         if (subjectOptional.isPresent()) {
-            User user = userOptional.get();
-            Subject subject = subjectOptional.get();
+            subject = subjectOptional.get();
             user.getSubjects().add(subject);
             subject.getUsers().add(user);
-            userService.save(user);
-            subjectService.save(subject);
-            Optional<UserSubject> userSubjectOptional = getUserSubject(new UserSubjectGetRequest(user.getId(), subject.getId()));
-            UserSubject userSubject;
-
-            if (userSubjectOptional.isPresent()) {
-                userSubject = userSubjectOptional.get();
-                userSubject.setDayOfWeek(request.getDayOfWeek());
-                userSubject.setTimeStart(request.getTimeStart());
-                userSubject.setTimeEnd(request.getTimeEnd());
-            } else {
-                userSubject = UserSubject
-                        .builder()
-                        .user(user)
-                        .subject(subject)
-                        .dayOfWeek(request.getDayOfWeek())
-                        .timeStart(request.getTimeStart())
-                        .timeEnd(request.getTimeEnd())
-                        .build();
-            }
-
-            return userSubjectRepository.save(userSubject);
 
         } else {
-            User user = userOptional.get();
-            Subject subject = Subject.builder()
+            subject = Subject.builder()
                     .name(request.getSubjectName())
                     .users(new HashSet<>())
                     .build();
 
             subject.getUsers().add(user);
             user.getSubjects().add(subject);
-            subjectService.save(subject);
-            userService.save(user);
-
-            UserSubject userSubject = UserSubject.builder()
-                    .user(user)
-                    .subject(subject)
-                    .dayOfWeek(request.getDayOfWeek())
-                    .timeStart(request.getTimeStart())
-                    .timeEnd(request.getTimeEnd())
-                    .build();
-
-            return userSubjectRepository.save(userSubject);
         }
+        return saveUserSubject(request, user, subject);
+    }
+
+    private UserSubject saveUserSubject(UserSubjectAddRequest request, User user, Subject subject) throws Exception {
+        subjectService.save(subject);
+        userService.save(user);
+        Optional<UserSubject> userSubjectOptional = getUserSubject(new UserSubjectGetRequest(user.getId(), subject.getId()));
+        UserSubject userSubject;
+        if (userSubjectOptional.isEmpty()) {
+            throw new Exception("User subject doesn't exist");
+
+        } else {
+            userSubject = userSubjectOptional.get();
+            userSubject.setDayOfWeek(request.getDayOfWeek());
+            userSubject.setTimeStart(request.getTimeStart());
+            userSubject.setTimeEnd(request.getTimeEnd());
+        }
+
+        return userSubjectRepository.save(userSubject);
     }
 }
