@@ -1,13 +1,14 @@
 .main-container {
-    background-color: pink;
+    background: rgba(255, 255, 255, 0.5);
     position: absolute;
     left: 0;
-    width: 100%;
-    top: 50px;
+    top: 100px;
     bottom: 60px;
     overflow: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    left: 100px;
+    right:100px;
 }

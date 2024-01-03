@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+<div class="timetable-container">
+  <div class="time-slots">
+    <div class="hour-label"></div>
+    <div class="timetable">
+      <div class="day-labels">
+        <div></div>
+        <div class="day" *ngFor="let day of timetable[0].days.slice(0, 6)">{{ day.name }}</div>
+      </div>
+      <div class="time-slot" *ngFor="let time of timetable">
+        <div class="hour">{{ time.hour }}</div>
+        <div class="day-slot" *ngFor="let daySlot of time.days.slice(0, 5)">
+          <div class="event" *ngIf="daySlot.event; else addEvent" (click)="daySlot.event = null">
+            <div [ngStyle]="{'font-size.px': daySlot.event.name ? 14 : 12}">{{ daySlot.event.name }}</div>
+            <div [ngStyle]="{'font-size.px': daySlot.event.teacher ? 10 : 12}">{{ daySlot.event.teacher }}</div>
+            <div [ngStyle]="{'font-size.px': daySlot.event.room ? 10 : 12}">{{ daySlot.event.room }}</div>
+          </div>
+          <ng-template #addEvent>
+            <button class="btn btn-success add-event-button" (click)="showAddEventDialog(time.hour, daySlot.name)">+</button>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showAddEventForm" class="add-event-form">
+  <h2>Dodaj wydarzenie</h2>
+  <form>
+    <label>Nazwa przedmiotu</label>
+    <input type="text" [(ngModel)]="eventName" name="eventName" required>
+
+    <div class="info-section">
+      <div class="info-label">Nauczyciel:</div>
+      <input type="text" [(ngModel)]="teacherName" name="teacherName">
+
+    </div>
+
+    <div class="info-section">
+      <div class="info-label">Sala:</div>
+      <input type="text" [(ngModel)]="room" name="room">
+    </div>
+
+    <button class="btn btn-success" (click)="addEvent(selectedHour, selectedDay)">Dodaj</button>
+    <button class="btn btn-danger" (click)="cancelAddEvent()">Anuluj</button>
+  </form>
+</div>
+
+
