@@ -1,0 +1,78 @@
+.timetable-container {
+    margin: 20px;
+    font-size: 12px;
+  }
+  
+  .time-slots {
+    display: flex;
+  }
+  
+  .hour-label, .timetable {
+    flex: 1;
+  }
+  
+  .day-labels {
+    display: flex;
+  }
+  
+  .day {
+    background: rgba(255, 255, 255, 0.5);
+    width: 200px;
+    flex: 1;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .time-slot {
+    background: rgba(255, 255, 255, 0.5);
+    display: flex;
+  }
+  
+  .hour, .day-slot {
+    flex: 1;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .event {
+    background-color: #dff0d8;
+    cursor: pointer;
+  }
+  
+  .add-event-button {
+    padding: 0 5px 0 5px;
+  }
+  
+  .add-event-form {
+    font-size: 14px; /* Dostosuj rozmiar czcionki do preferencji */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  
+  .info-section {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .info-label {
+    flex: 1;
+    text-align: right;
+    margin-right: 10px;
+  }
+  
+  .info-value {
+    flex: 2;
+    font-size: 12px; /* Zmniejsz rozmiar czcionki dla informacji */
+    border: 1px solid #ddd;
+    padding: 5px;
+  }

@@ -1,6 +1,41 @@
-header { 
-    position: absolute; 
-    left: 0; 
-    width: 100%;
-    overflow: hidden; 
+header {
+    background: rgba(255, 255, 255, 0.5);
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: 100px;
+    right: 100px;
+    height: 100px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    top: 0;
+}
+
+h2 {
+    color: #A9B5B5;
+    font-weight: 400;
+}
+
+.home {
+    background-color: white;
+    margin-right: 20px;
+    padding: 0 20px 3px 3px;
+    border-radius: 10px;
+}
+
+.separator {
+    color:  #A9B5B5;
+    height: 60%;
+    width: 2px;
+    margin: 0 10px;
+    position: fixed;
+}
+
+.home-end {
+    background-color: white;
+    height: 5px;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 25px;
 }

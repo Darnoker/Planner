@@ -1,0 +1,22 @@
+.card {
+    padding: 20px;
+    background-color: white;
+    border-radius: 17px;
+    }
+    
+    .container{
+      border: 2px solid white; /* set border color to blue */
+      border-radius: 20px;
+      padding: 5px;
+      margin: 5px;
+    }
+    
+    .witaj {
+      text-align: center;
+      font-size: 30px;
+      color:  #A9B5B5;
+      margin: 20px;
+      margin-bottom: 0px;
+    }
+    
+    
