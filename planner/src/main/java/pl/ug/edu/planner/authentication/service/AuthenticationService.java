@@ -36,8 +36,6 @@ public class AuthenticationService {
 
         }
         User user = User.builder()
-                .name(request.getName())
-                .surname(request.getSurname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
