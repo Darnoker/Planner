@@ -9,7 +9,6 @@ import pl.ug.edu.planner.authentication.service.AuthenticationService;
 import pl.ug.edu.planner.authentication.request.RegisterRequest;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
@@ -22,7 +21,7 @@ public class AuthenticationController {
         if(response.getMessage().equals("User already exists")) {
             return ResponseEntity.status(409).body(response);
         }
-        return ResponseEntity.ok(authenticationService.register(request));
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/authenticate")
