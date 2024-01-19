@@ -1,47 +1,59 @@
-
 <div class="container-fluid" style="width: 350px;">
-    <div class="row">
-      <div class="col">
-        <div class="container">
-          <div class="card">
-            <div class="witaj">Registration</div>
-            <form>
-              <div class="form-group">
-                <div class="text" style="text-align:center;">
-                  Enter your details to register
-                </div>
-                <div class="text" style="text-align:center; margin-bottom: 10px">
-                  an account.
-                </div>
+  <div class="row">
+    <div class="col">
+      <div class="container">
+        <div class="card">
+          <div class="witaj">Registration</div>
+          <form [formGroup]="registerForm">
+            <div class="form-group">
+              <div class="text" style="text-align:center;">
+                Enter your details to register
               </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input
-                  [(ngModel)]="email"
-                  style="background-color: transparent; border-color: #91B2B9; border-width: 2px;"
-                  type="text"
-                  class="form-control" name="username" placeholder="Email" />
+              <div class="text" style="text-align:center; margin-bottom: 10px">
+                an account.
               </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input
-                  [(ngModel)]="password"
-                  style="background-color: transparent; border-color: #91B2B9; border-width: 2px;"
-                  type="password"
-                  class="form-control"  name="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="email"
+                placeholder="Enter your email"
+              />
+              <div
+                *ngIf="submitted && registerForm.get('email')?.errors"
+                class="text-danger">
+                <div *ngIf="registerForm.get('email')?.hasError('required')">Email is required</div>
+                <div *ngIf="registerForm.get('email')?.hasError('email')">Invalid email format</div>
               </div>
-              <div class="form-group">
-                <button
-                  (click)="onSubmit()"
-                  type="submit"
-                  class="btn btn-block"
-                  style="background-color: #91B2B9;">Sign
-                  Up</button>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                formControlName="password"
+                style="background-color: transparent; border-color: #91B2B9; border-width: 2px;"
+                type="password"
+                class="form-control" name="password" placeholder="Password"/>
+              <div
+                *ngIf="submitted && registerForm.get('password')?.errors"
+                class="text-danger">
+                <div *ngIf="registerForm.get('password')?.hasError('required')">Password is required</div>
               </div>
-              <a href="/login">Have an account? Click here!</a>
-            </form>
-          </div>
+            </div>
+            <div class="form-group">
+              <button
+                (click)="onSubmit()"
+                type="submit"
+                class="btn btn-block"
+                style="background-color: #91B2B9;">Sign
+                Up
+              </button>
+            </div>
+            <a href="/login">Have an account? Click here!</a>
+          </form>
         </div>
       </div>
     </div>
   </div>
+</div>
