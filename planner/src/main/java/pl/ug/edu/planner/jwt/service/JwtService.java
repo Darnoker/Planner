@@ -5,7 +5,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -19,9 +21,11 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
 
     private static final String SECRET_KEY_FILE_PATH = "secret-key/secret-key.txt";
+    private final UserDetailsService userDetailsService;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -38,12 +42,24 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
+        if(token.startsWith("Bearer ")){
+            token = token.substring("Bearer e".length());
+        }
         final String userEmail = extractUsername(token);
-        return (userEmail.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return (userEmail.equals(userDetails.getUsername()) && isTokenExpired(token));
+    }
+
+    public boolean isTokenValid(String token) {
+        if(token.startsWith("Bearer ")) {
+            token = token.substring("Bearer e".length() - 1);
+        }
+        final String userEmail = extractUsername(token);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
+        return (userEmail.equals(userDetails.getUsername()) && isTokenExpired(token));
     }
 
     private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+        return !extractExpiration(token).before(new Date());
     }
 
     private Date extractExpiration(String token) {

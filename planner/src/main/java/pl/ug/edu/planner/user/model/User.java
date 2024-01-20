@@ -23,8 +23,6 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
-    private String surname;
     private String email;
     private String password;
 
@@ -72,7 +70,7 @@ public class User implements UserDetails {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, email);
+        return Objects.hash(id, email);
     }
 
     @Override
@@ -81,8 +79,6 @@ public class User implements UserDetails {
         if (obj == null || getClass() != obj.getClass()) return false;
         User user = (User) obj;
         return Objects.equals(id, user.getId()) &&
-                Objects.equals(name, user.getName()) &&
-                Objects.equals(surname, user.getSurname()) &&
                 Objects.equals(email, user.getEmail());
     }
 }
