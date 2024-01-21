@@ -3,14 +3,14 @@
     background-color: white;
     border-radius: 17px;
     }
-    
+
     .container{
-      border: 2px solid white; /* set border color to blue */
+      border: 2px solid white;
       border-radius: 20px;
       padding: 5px;
       margin: 5px;
     }
-    
+
     .witaj {
       text-align: center;
       font-size: 30px;
@@ -18,12 +18,12 @@
       margin: 20px;
       margin-bottom: 0px;
     }
-    
+
     a {
-      color: inherit; 
-      text-decoration: none; 
+      color: inherit;
+      text-decoration: none;
   }
 
   a:hover{
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
