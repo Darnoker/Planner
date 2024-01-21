@@ -6,6 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.ug.edu.planner.authentication.request.AuthenticationRequest;
+import pl.ug.edu.planner.authentication.request.TokenRequest;
 import pl.ug.edu.planner.authentication.response.AuthenticationResponse;
 import pl.ug.edu.planner.authentication.request.RegisterRequest;
 import pl.ug.edu.planner.jwt.service.JwtService;
@@ -56,12 +57,38 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
+        Optional<User> userOptional = userRepository.findUserByEmail(request.getEmail());
 
-        var user = userRepository.findUserByEmail(request.getEmail()).orElseThrow();
-        var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse
-                .builder()
-                .token(jwtToken)
-                .build();
+        if (userOptional.isPresent()) {
+            var user = userRepository.findUserByEmail(request.getEmail()).orElseThrow();
+            var jwtToken = jwtService.generateToken(user);
+            return AuthenticationResponse
+                    .builder()
+                    .message("Succesfully authenticate")
+                    .token(jwtToken)
+                    .build();
+        } else {
+            return AuthenticationResponse
+                    .builder()
+                    .message("There is no such user")
+                    .build();
+        }
+    }
+
+    public AuthenticationResponse IsTokenValid(TokenRequest request) {
+        var token = request.getToken();
+        var response = jwtService.isTokenValid(token);
+        if (response){
+            return AuthenticationResponse
+                    .builder()
+                    .message("Token is valid")
+                    .token(token)
+                    .build();
+        } else {
+            return AuthenticationResponse
+                    .builder()
+                    .message("Token is invalid")
+                    .build();
+        }
     }
 }

@@ -34,7 +34,9 @@
                 formControlName="password"
                 style="background-color: transparent; border-color: #91B2B9; border-width: 2px;"
                 type="password"
-                class="form-control" name="password" placeholder="Password"/>
+                class="form-control"
+                name="password"
+                placeholder="Password"/>
               <div
                 *ngIf="submitted && registerForm.get('password')?.errors"
                 class="text-danger">
@@ -46,8 +48,8 @@
                 (click)="onSubmit()"
                 type="submit"
                 class="btn btn-block"
-                style="background-color: #91B2B9;">Sign
-                Up
+                style="background-color: #91B2B9;">
+                Sign Up
               </button>
             </div>
             <a href="/login">Have an account? Click here!</a>
