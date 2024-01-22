@@ -32,6 +32,8 @@ public class UserSubject {
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
+    private String teacher;
+    private String room;
     private DayOfWeek dayOfWeek;
     private LocalTime timeStart;
     private LocalTime timeEnd;
