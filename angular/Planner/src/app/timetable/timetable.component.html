@@ -10,7 +10,7 @@
       </div>
       <div class="time-slot" *ngFor="let time of timetable">
         <div class="hour">{{ time.hour }}</div>
-        <div class="day-slot" *ngFor="let daySlot of time.days.slice(0, 5)">
+        <div class="day-slot" *ngFor="let daySlot of time.days.slice(1, 6)">
           <div class="event" *ngIf="daySlot.event; else addEvent" (click)="daySlot.event = null">
             <div [ngStyle]="{'font-size.px': daySlot.event.name ? 14 : 12}">{{ daySlot.event.name }}</div>
             <div [ngStyle]="{'font-size.px': daySlot.event.teacher ? 10 : 12}">{{ daySlot.event.teacher }}</div>

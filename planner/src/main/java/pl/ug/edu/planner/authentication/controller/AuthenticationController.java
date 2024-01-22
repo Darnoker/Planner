@@ -12,6 +12,7 @@ import pl.ug.edu.planner.authentication.request.RegisterRequest;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin
 @RequiredArgsConstructor
 public class AuthenticationController {
 
@@ -36,7 +37,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/IsTokenValid")
-    public ResponseEntity<AuthenticationResponse> isTokenValid(@RequestBody TokenRequest request){
+    public ResponseEntity<AuthenticationResponse> isTokenValid(@RequestBody TokenRequest request) {
         AuthenticationResponse response = authenticationService.IsTokenValid(request);
         if(response.getMessage().equals("Token is invalid")){
             return ResponseEntity.status(401).body(response);

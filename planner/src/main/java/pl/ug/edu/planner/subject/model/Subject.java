@@ -16,9 +16,10 @@ import java.util.Set;
 public class Subject {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
 
     @ToString.Exclude
     @ManyToMany(mappedBy = "subjects", fetch = FetchType.LAZY)

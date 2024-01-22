@@ -5,6 +5,8 @@ import pl.ug.edu.planner.service.BaseService;
 import pl.ug.edu.planner.user.model.User;
 import pl.ug.edu.planner.user.repository.UserRepository;
 
+import java.util.Optional;
+
 @Service
 public class UserService extends BaseService<User, Long> {
 
@@ -15,5 +17,7 @@ public class UserService extends BaseService<User, Long> {
         this.userRepository = userRepository;
     }
 
-
+    public Optional<User> getByEmail(String email) {
+        return this.userRepository.findUserByEmail(email);
+    }
 }
