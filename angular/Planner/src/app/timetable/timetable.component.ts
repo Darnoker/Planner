@@ -50,7 +50,6 @@ export class TimetableComponent implements OnInit {
 
   addEvent(hour: string, day: string) {
     const timeSlot = this.timetable.find(time => time.hour === hour);
-    console.log(timeSlot)
     const daySlot = timeSlot?.days.find(d => d.name === day);
     const [timeStart, timeEnd] = hour.split('-')
     const timeStartPadded = timeStart.split(':').map(part => part.padStart(2, '0')).join(':');
@@ -69,11 +68,8 @@ export class TimetableComponent implements OnInit {
         timeStart: timeStartPadded,
         timeEnd: timeEndPadded
       }
-      console.log(request)
 
-      this.httpClient.post('http://localhost:8080/user-subject/add', request, { headers: headers }).subscribe(response => {
-        console.log(response)
-      })
+      this.httpClient.post('http://localhost:8080/user-subject/add', request, { headers: headers }).subscribe()
 
 
 
@@ -84,9 +80,7 @@ export class TimetableComponent implements OnInit {
 
 
   addSubject(hour: string, day: string, userSubjectDto: UserSubjectDTO) {
-    console.log(hour)
     const timeSlot = this.timetable.find(time => time.hour === hour);
-    console.log(timeSlot)
     const daySlot = timeSlot?.days.find(d => d.name === day);
 
     if (daySlot) {
